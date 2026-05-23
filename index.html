@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html class="dark" lang="ro">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Academia de Video | AI + Video în România</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+tailwind.config = {
+    darkMode: "class",
+    theme: {
+        extend: {
+            colors: {
+                "tertiary-fixed-dim": "#c2c7cf",
+                "tertiary": "#fffdff",
+                "secondary-container": "#454749",
+                "on-primary-container": "#007255",
+                "on-tertiary": "#2c3137",
+                "on-primary-fixed": "#002116",
+                "on-surface-variant": "#b9cbc1",
+                "outline": "#83958c",
+                "surface-container-low": "#191c1e",
+                "on-primary-fixed-variant": "#00513c",
+                "tertiary-fixed": "#dee3eb",
+                "on-tertiary-fixed-variant": "#42474e",
+                "error-container": "#93000a",
+                "on-primary": "#003828",
+                "inverse-primary": "#006c50",
+                "surface-container": "#1d2022",
+                "surface-bright": "#37393c",
+                "on-tertiary-fixed": "#171c22",
+                "on-error-container": "#ffdad6",
+                "surface": "#111416",
+                "on-error": "#690005",
+                "on-surface": "#e1e2e5",
+                "primary-fixed": "#36ffc4",
+                "tertiary-container": "#dde1ea",
+                "error": "#ffb4ab",
+                "secondary-fixed-dim": "#c6c6c9",
+                "on-secondary": "#2f3133",
+                "on-secondary-fixed-variant": "#454749",
+                "surface-container-high": "#272a2c",
+                "on-secondary-container": "#b4b5b7",
+                "secondary-fixed": "#e2e2e5",
+                "surface-dim": "#111416",
+                "surface-container-lowest": "#0c0f11",
+                "outline-variant": "#3a4a43",
+                "surface-container-highest": "#323537",
+                "on-background": "#e1e2e5",
+                "primary-fixed-dim": "#00e1ab",
+                "surface-tint": "#00e1ab",
+                "on-secondary-fixed": "#1a1c1e",
+                "secondary": "#c6c6c9",
+                "background": "#111416",
+                "primary-container": "#00ffc2",
+                "primary": "#fbfffa",
+                "surface-variant": "#323537",
+                "inverse-surface": "#e1e2e5",
+                "on-tertiary-container": "#5f646b",
+                "inverse-on-surface": "#2e3133"
+            },
+            fontFamily: {
+                "headline": ["Space Grotesk"],
+                "body": ["Manrope"],
+                "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+        },
+    },
+}
+</script>
+<style>
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+    }
+    .cinematic-gradient {
+        background: linear-gradient(180deg, rgba(17,20,22,0) 0%, rgba(17,20,22,1) 100%);
+    }
+    .nav-link {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.875rem;
+        font-weight: 700;
+        letter-spacing: 0.025em;
+        text-transform: uppercase;
+        color: rgba(251,255,250,0.6);
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+    .nav-link:hover { color: #00e1ab; }
+    .nav-link.active { color: #00e1ab; }
+
+    /* AI showcase animated border */
+    @keyframes borderPulse {
+        0%, 100% { opacity: 0.4; }
+        50% { opacity: 1; }
+    }
+    .ai-border-pulse {
+        animation: borderPulse 3s ease-in-out infinite;
+    }
+
+    /* Grid lines background */
+    .grid-bg {
+        background-image: 
+            linear-gradient(rgba(0, 225, 171, 0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 225, 171, 0.04) 1px, transparent 1px);
+        background-size: 60px 60px;
+    }
+
+    /* Glowing text */
+    .glow-text {
+        text-shadow: 0 0 60px rgba(0, 225, 171, 0.3);
+    }
+
+    /* Video card hover */
+    .video-card {
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s;
+    }
+    .video-card:hover {
+        transform: translateY(-6px) scale(1.02);
+        box-shadow: 0 20px 60px rgba(0, 225, 171, 0.15);
+    }
+
+    /* Fade in animation */
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up {
+        animation: fadeUp 0.8s ease forwards;
+    }
+    .fade-up-delay-1 { animation-delay: 0.15s; opacity: 0; }
+    .fade-up-delay-2 { animation-delay: 0.3s; opacity: 0; }
+    .fade-up-delay-3 { animation-delay: 0.45s; opacity: 0; }
+
+    /* Ticker */
+    @keyframes ticker {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+    .ticker-inner {
+        animation: ticker 25s linear infinite;
+        white-space: nowrap;
+    }
+    .ticker-inner:hover { animation-play-state: paused; }
+
+    /* Mobile menu */
+    #mobile-menu { display: none; }
+    #mobile-menu.open { display: flex; }
+</style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '973248965246898');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=973248965246898&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<!-- TikTok Pixel Code Start -->
+<script>
+!function (w, d, t) {
+  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+  ttq.load('D80VQNRC77UCEH8TB2I0');
+  ttq.page();
+}(window, document, 'ttq');
+</script>
+<!-- TikTok Pixel Code End -->
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#111416]/80 backdrop-blur-xl border-b border-outline-variant/10">
+    <div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+        <a href="/index.html" class="text-2xl font-bold tracking-tighter text-[#fbfffa] font-headline" style="text-decoration:none;">Academia de Video</a>
+        <div class="hidden md:flex gap-8 items-center">
+            <a class="nav-link active" href="/index.html">HOME</a>
+            <a class="nav-link" href="/despre-noi.html">DESPRE NOI</a>
+            <a class="nav-link" href="/cursuri.html">CURSURI</a>
+            <a class="nav-link" href="/blog.html">BLOG</a>
+        </div>
+        <a class="bg-primary-fixed text-on-primary-fixed px-6 py-2 rounded-md font-bold text-sm tracking-wide transition-all active:scale-95 hover:bg-primary-fixed-dim inline-block hidden md:inline-block"
+           href="https://www.skool.com/editare-video-5587/about?ref=ff1bffd1e5804078becc0d7792f183f3&utm_source=website&utm_medium=organic&utm_campaign=nav&utm_content=navbar"
+           onclick="fbq('track', 'InitiateCheckout', {content_name: 'navbar_cta'}); ttq.track('InitiateCheckout', {content_name: 'navbar_cta'});">
+            VREAU 7 ZILE GRATIS
+        </a>
+        <!-- Mobile hamburger -->
+        <button id="hamburger" class="md:hidden text-primary" onclick="document.getElementById('mobile-menu').classList.toggle('open')">
+            <span class="material-symbols-outlined text-3xl">menu</span>
+        </button>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="flex-col bg-[#111416] px-8 py-6 gap-6 border-t border-outline-variant/10">
+        <a class="nav-link active text-base" href="/index.html">HOME</a>
+        <a class="nav-link text-base" href="/despre-noi.html">DESPRE NOI</a>
+        <a class="nav-link text-base" href="/cursuri.html">CURSURI</a>
+        <a class="nav-link text-base" href="/blog.html">BLOG</a>
+        <a class="bg-primary-fixed text-on-primary-fixed px-6 py-3 rounded-md font-bold text-sm tracking-wide text-center"
+           href="https://www.skool.com/editare-video-5587/about?ref=ff1bffd1e5804078becc0d7792f183f3"
+           onclick="fbq('track', 'InitiateCheckout', {content_name: 'mobile_cta'}); ttq.track('InitiateCheckout', {content_name: 'mobile_cta'});">
+            VREAU 7 ZILE GRATIS
+        </a>
+    </div>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="relative min-h-screen flex items-center pt-20 overflow-hidden grid-bg">
+    <!-- Ambient glow -->
+    <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full opacity-10 blur-[120px]" style="background: radial-gradient(ellipse, #00e1ab 0%, transparent 70%);"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-8 w-full py-24">
+        <div class="max-w-4xl">
+            <span class="fade-up inline-block px-3 py-1 bg-secondary-container text-[#00e1ab] rounded-full text-[10px] font-bold tracking-[0.2em] uppercase mb-6 font-headline border border-[#00e1ab]/20">
+                ✦ AI + VIDEO — VIITORUL ESTE ACUM
+            </span>
+            <h1 class="fade-up fade-up-delay-1 text-6xl md:text-[88px] font-headline font-bold leading-[0.88] tracking-tighter text-primary mb-8 glow-text">
+                CREEAZĂ CLIPURI<br>
+                <span class="text-primary-fixed-dim italic">CU INTELIGENȚĂ</span><br>
+                ARTIFICIALĂ.
+            </h1>
+            <p class="fade-up fade-up-delay-2 text-xl md:text-2xl text-on-surface-variant max-w-2xl mb-10 leading-relaxed font-light">
+                Trăim în momentul în care oricine poate crea clipuri cinematografice fără cameră, fără echipă și fără experiență anterioară. Noi am descoperit cum — și acum îți arătăm și ție.
+            </p>
+            <div class="fade-up fade-up-delay-3 flex flex-col sm:flex-row gap-4">
+                <a class="bg-primary-fixed text-on-primary-fixed px-10 py-4 rounded-md font-bold text-lg tracking-tight hover:bg-primary-fixed-dim transition-colors inline-block text-center"
+                   href="https://www.skool.com/editare-video-5587/about?ref=ff1bffd1e5804078becc0d7792f183f3&utm_source=website&utm_medium=organic&utm_campaign=hero"
+                   onclick="fbq('track', 'InitiateCheckout', {content_name: 'hero_cta'}); ttq.track('InitiateCheckout', {content_name: 'hero_cta'});">
+                    Intră 7 zile gratuit
+                </a>
+                <a class="border border-outline-variant text-primary px-10 py-4 rounded-md font-bold text-lg tracking-tight hover:bg-surface-container-high transition-colors inline-block text-center"
+                   href="#ai-showcase">
+                    Vezi exemple AI ↓
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TICKER -->
+<div class="bg-surface-container-lowest py-4 border-y border-outline-variant/10 overflow-hidden">
+    <div class="ticker-inner inline-flex gap-16 text-[#00e1ab] font-headline font-bold text-sm tracking-[0.15em] uppercase">
+        <span>✦ Kling AI</span><span>✦ Runway Gen-3</span><span>✦ Sora</span><span>✦ Midjourney</span>
+        <span>✦ Claude</span><span>✦ ChatGPT</span><span>✦ ElevenLabs</span><span>✦ CapCut AI</span>
+        <span>✦ Premiere Pro AI</span><span>✦ Pika Labs</span><span>✦ Luma Dream Machine</span><span>✦ Topaz</span>
+        <!-- duplicate for seamless loop -->
+        <span>✦ Kling AI</span><span>✦ Runway Gen-3</span><span>✦ Sora</span><span>✦ Midjourney</span>
+        <span>✦ Claude</span><span>✦ ChatGPT</span><span>✦ ElevenLabs</span><span>✦ CapCut AI</span>
+        <span>✦ Premiere Pro AI</span><span>✦ Pika Labs</span><span>✦ Luma Dream Machine</span><span>✦ Topaz</span>
+    </div>
+</div>
+
+<!-- WHAT IS AI VIDEO -->
+<section class="py-28 bg-surface">
+    <div class="max-w-7xl mx-auto px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+            <div>
+                <span class="text-[#00e1ab] font-headline font-bold text-xs tracking-[0.3em] uppercase mb-4 block">Ce se întâmplă acum</span>
+                <h2 class="text-4xl md:text-5xl font-headline font-bold text-primary uppercase tracking-tight mb-8 leading-tight">
+                    AI-UL A SCHIMBAT<br>INDUSTRIA VIDEO<br><span class="text-primary-fixed-dim">PENTRU TOTDEAUNA.</span>
+                </h2>
+                <div class="space-y-6 text-on-surface-variant leading-relaxed text-lg">
+                    <p>Acum câțiva ani, un clip cinematic necesita o echipă numeroasă, echipament de zeci de mii de euro și zile întregi de filmare.</p>
+                    <p>Astăzi, cu instrumentele potrivite și cunoștințele necesare, <strong class="text-primary">poți genera scene foto-realiste și voci sintetice perfect calibrate</strong> — totul de pe un laptop obișnuit.</p>
+                    <p>Branduri mari din întreaga lume au început deja să folosească AI video pentru reclame, prezentări și conținut social media. <strong class="text-primary">Cei care învață acum vor fi cei care vor conduce piața mâine.</strong></p>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <!-- Stat cards -->
+                <div class="bg-surface-container-low rounded-xl p-8 border border-outline-variant/20 hover:border-primary-fixed/30 transition-colors">
+                    <div class="text-5xl font-headline font-bold text-primary-fixed-dim mb-2">80%</div>
+                    <div class="text-on-surface-variant text-sm leading-relaxed">din conținutul online va fi generat sau augmentat cu AI în viitorul apropiat</div>
+                </div>
+                <div class="bg-surface-container-low rounded-xl p-8 border border-outline-variant/20 hover:border-primary-fixed/30 transition-colors">
+                    <div class="text-5xl font-headline font-bold text-primary-fixed-dim mb-2">10x</div>
+                    <div class="text-on-surface-variant text-sm leading-relaxed">mai rapid — creezi clipuri de calitate cinematografică fără filmare</div>
+                </div>
+                <div class="bg-surface-container-low rounded-xl p-8 border border-outline-variant/20 hover:border-primary-fixed/30 transition-colors">
+                    <div class="text-5xl font-headline font-bold text-primary-fixed-dim mb-2">0 €</div>
+                    <div class="text-on-surface-variant text-sm leading-relaxed">echipament necesar. Un laptop și o conexiune la internet sunt suficiente</div>
+                </div>
+                <div class="bg-surface-container-low rounded-xl p-8 border border-outline-variant/20 hover:border-primary-fixed/30 transition-colors">
+                    <div class="text-5xl font-headline font-bold text-primary-fixed-dim mb-2">∞</div>
+                    <div class="text-on-surface-variant text-sm leading-relaxed">posibilități creative — de la reclame la scurtmetraje, totul devine accesibil</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- AI VIDEO SHOWCASE -->
+<section class="py-28 bg-surface-container-lowest grid-bg" id="ai-showcase">
+    <div class="max-w-7xl mx-auto px-8">
+        <div class="text-center mb-20">
+            <span class="text-[#00e1ab] font-headline font-bold text-xs tracking-[0.3em] uppercase mb-4 block">Creat 100% cu AI</span>
+            <h2 class="text-4xl md:text-5xl font-headline font-bold text-primary uppercase tracking-tight mb-4">
+                EXEMPLE REALE.<br>REZULTATE REALE.
+            </h2>
+            <p class="text-on-surface-variant text-xl max-w-2xl mx-auto">
+                Toate clipurile de mai jos au fost generate cu instrumente AI, pornind de la simple descrieri text. Niciun actor. Nicio cameră. Nicio locație.
+            </p>
+        </div>
+
+        <!-- Video Grid — real AI clips -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+            <!-- Featured large video: Starbucks -->
+            <div class="lg:col-span-2 video-card rounded-xl overflow-hidden border border-outline-variant/20 bg-surface-container-lowest relative" style="aspect-ratio:16/9;">
+                <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+                    <source src="videos/starbucks_machiato_ad.mp4" type="video/mp4">
+                </video>
+                <div class="absolute bottom-4 left-4">
+                    <span class="bg-primary-fixed text-on-primary-fixed px-3 py-1 rounded text-xs font-bold uppercase tracking-wider">Featured</span>
+                </div>
+            </div>
+            <!-- Right column: Salon Canin + Cafe stacked -->
+            <div class="flex flex-col gap-6">
+                <div class="video-card rounded-xl overflow-hidden border border-outline-variant/20 bg-surface-container-lowest flex-1" style="aspect-ratio:16/9;">
+                    <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+                        <source src="videos/salon_canin_ad.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="video-card rounded-xl overflow-hidden border border-outline-variant/20 bg-surface-container-lowest flex-1" style="aspect-ratio:16/9;">
+                    <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+                        <source src="videos/cafe_ad_site.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Ad 13 sec -->
+            <div class="video-card rounded-xl overflow-hidden border border-outline-variant/20 bg-surface-container-lowest" style="aspect-ratio:16/9;">
+                <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+                    <source src="videos/ad_13_sec_site.mp4" type="video/mp4">
+                </video>
+            </div>
+            <!-- Igloo pe munte -->
+            <div class="video-card rounded-xl overflow-hidden border border-outline-variant/20 bg-surface-container-lowest" style="aspect-ratio:16/9;">
+                <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+                    <source src="videos/igloo_munte.mp4" type="video/mp4">
+                </video>
+            </div>
+            <!-- Jungle big snake -->
+            <div class="video-card rounded-xl overflow-hidden border border-outline-variant/20 bg-surface-container-lowest" style="aspect-ratio:16/9;">
+                <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+                    <source src="videos/jungle_big_snake.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+
+        <div class="text-center mt-12">
+            <p class="text-on-surface-variant text-sm mb-6">Vrei să înveți să creezi și tu clipuri ca acestea?</p>
+            <a class="bg-primary-fixed text-on-primary-fixed px-10 py-4 rounded-md font-bold text-lg tracking-tight hover:bg-primary-fixed-dim transition-colors inline-block"
+               href="https://www.skool.com/editare-video-5587/about?ref=ff1bffd1e5804078becc0d7792f183f3&utm_source=website&utm_medium=organic&utm_campaign=showcase"
+               onclick="fbq('track', 'InitiateCheckout', {content_name: 'showcase_cta'}); ttq.track('InitiateCheckout', {content_name: 'showcase_cta'});">
+                Intră gratuit 7 zile
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- HOW AI IS USED IN VIDEO TODAY -->
+<section class="py-28 bg-surface">
+    <div class="max-w-7xl mx-auto px-8">
+        <div class="text-center mb-20">
+            <span class="text-[#00e1ab] font-headline font-bold text-xs tracking-[0.3em] uppercase mb-4 block">Aplicații practice</span>
+            <h2 class="text-4xl md:text-5xl font-headline font-bold text-primary uppercase tracking-tight mb-4">
+                CUM FOLOSIM AI<br>ÎN VIDEO AZI
+            </h2>
+            <p class="text-on-surface-variant text-xl max-w-2xl mx-auto">
+                Nu e doar despre generare de imagini. AI-ul a transformat fiecare etapă a producției video.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Card 1 -->
+            <div class="group p-8 bg-surface-container-low rounded-xl border border-outline-variant/10 hover:border-primary-fixed-dim/40 transition-all duration-300">
+                <div class="w-12 h-12 rounded-lg bg-primary-fixed/10 flex items-center justify-center mb-6 group-hover:bg-primary-fixed/20 transition-colors">
+                    <span class="material-symbols-outlined text-2xl text-primary-fixed-dim">auto_awesome</span>
+                </div>
+                <h3 class="text-xl font-headline font-bold text-primary mb-3 uppercase">Generare Video</h3>
+                <p class="text-on-surface-variant leading-relaxed text-sm">Seedance 2.0, Kling AI, Runway Gen-3 — creezi scene realiste pornind de la o simplă descriere. Transformări, timelapse-uri, peisaje — totul generat în câteva minute.</p>
+            </div>
+            <!-- Card 2 -->
+            <div class="group p-8 bg-surface-container-low rounded-xl border border-outline-variant/10 hover:border-primary-fixed-dim/40 transition-all duration-300">
+                <div class="w-12 h-12 rounded-lg bg-primary-fixed/10 flex items-center justify-center mb-6 group-hover:bg-primary-fixed/20 transition-colors">
+                    <span class="material-symbols-outlined text-2xl text-primary-fixed-dim">edit_document</span>
+                </div>
+                <h3 class="text-xl font-headline font-bold text-primary mb-3 uppercase">Scriere Scenarii</h3>
+                <p class="text-on-surface-variant leading-relaxed text-sm">Claude și ChatGPT pot scrie hook-uri virale, scripturi complete și titluri optimizate pentru algoritm — în câteva secunde. Noi am automatizat complet acest proces.</p>
+            </div>
+            <!-- Card 3 -->
+            <div class="group p-8 bg-surface-container-low rounded-xl border border-outline-variant/10 hover:border-primary-fixed-dim/40 transition-all duration-300">
+                <div class="w-12 h-12 rounded-lg bg-primary-fixed/10 flex items-center justify-center mb-6 group-hover:bg-primary-fixed/20 transition-colors">
+                    <span class="material-symbols-outlined text-2xl text-primary-fixed-dim">mic</span>
+                </div>
+                <h3 class="text-xl font-headline font-bold text-primary mb-3 uppercase">Voice AI</h3>
+                <p class="text-on-surface-variant leading-relaxed text-sm">ElevenLabs generează voci naturale în română, engleză și multe alte limbi și accente — astfel poți avea libertate de exprimare.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="py-24 relative overflow-hidden" style="background: linear-gradient(135deg, #003828 0%, #111416 50%, #002116 100%);">
+    <div class="absolute inset-0 grid-bg opacity-30"></div>
+    <div class="absolute top-0 right-0 w-96 h-96 rounded-full blur-[150px] opacity-20" style="background: #00e1ab;"></div>
+    <div class="relative z-10 max-w-4xl mx-auto px-8 text-center">
+        <h2 class="text-4xl md:text-6xl font-headline font-bold text-primary uppercase tracking-tight mb-6 glow-text">
+            VIITORUL VIDEO<br>ESTE GENERAT CU AI.<br>
+            <span class="text-primary-fixed-dim">EȘTI PREGĂTIT?</span>
+        </h2>
+        <p class="text-on-surface-variant text-xl mb-10 max-w-xl mx-auto">
+            Intră în comunitate și învață pas cu pas cum să folosești cele mai puternice instrumente AI pentru video.
+        </p>
+        <a class="bg-primary-fixed text-on-primary-fixed px-12 py-5 rounded-md font-bold text-xl tracking-tight hover:bg-primary-fixed-dim transition-all active:scale-95 uppercase inline-block"
+           href="https://www.skool.com/editare-video-5587/about?ref=ff1bffd1e5804078becc0d7792f183f3&utm_source=website&utm_medium=organic&utm_campaign=cta_band"
+           onclick="fbq('track', 'InitiateCheckout', {content_name: 'band_cta'}); ttq.track('InitiateCheckout', {content_name: 'band_cta'});">
+            INTRĂ 7 ZILE GRATUIT
+        </a>
+        <p class="text-on-surface-variant/50 text-sm mt-4">Fără obligații. Anulezi oricând.</p>
+    </div>
+</section>
+
+<!-- WHAT YOU'LL LEARN — quick preview -->
+<section class="py-28 bg-surface">
+    <div class="max-w-7xl mx-auto px-8">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+            <div>
+                <span class="text-[#00e1ab] font-headline font-bold text-xs tracking-[0.3em] uppercase mb-4 block">Curriculum</span>
+                <h2 class="text-4xl md:text-5xl font-headline font-bold text-primary uppercase tracking-tight">
+                    CE ÎNVEȚI<br>ÎN ACADEMIA<br>DE VIDEO
+                </h2>
+            </div>
+            <a href="/cursuri.html" class="text-primary-fixed-dim font-headline font-bold text-sm tracking-[0.15em] uppercase hover:text-primary-fixed transition-colors whitespace-nowrap">
+                Vezi toate cursurile →
+            </a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="flex items-start gap-5 p-6 bg-surface-container-low rounded-xl border border-outline-variant/10 hover:border-primary-fixed-dim/30 transition-colors">
+                <span class="material-symbols-outlined text-3xl text-primary-fixed shrink-0">smart_toy</span>
+                <div>
+                    <h3 class="font-headline font-bold text-primary text-lg mb-1 uppercase">Generare Video AI</h3>
+                    <p class="text-on-surface-variant text-sm">Kling AI, Runway, prompting avansat pentru secvențe cinematografice</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-5 p-6 bg-surface-container-low rounded-xl border border-outline-variant/10 hover:border-primary-fixed-dim/30 transition-colors">
+                <span class="material-symbols-outlined text-3xl text-primary-fixed shrink-0">video_settings</span>
+                <div>
+                    <h3 class="font-headline font-bold text-primary text-lg mb-1 uppercase">Editare Video Pro</h3>
+                    <p class="text-on-surface-variant text-sm">Adobe Premiere Pro — software folosit de cele mai mari case de producție</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-5 p-6 bg-surface-container-low rounded-xl border border-outline-variant/10 hover:border-primary-fixed-dim/30 transition-colors">
+                <span class="material-symbols-outlined text-3xl text-primary-fixed shrink-0">trending_up</span>
+                <div>
+                    <h3 class="font-headline font-bold text-primary text-lg mb-1 uppercase">Clipuri Virale</h3>
+                    <p class="text-on-surface-variant text-sm">Rețeta noastră testată care a adus milioane de vizualizări pe social media</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-5 p-6 bg-surface-container-low rounded-xl border border-outline-variant/10 hover:border-primary-fixed-dim/30 transition-colors">
+                <span class="material-symbols-outlined text-3xl text-primary-fixed shrink-0">smartphone</span>
+                <div>
+                    <h3 class="font-headline font-bold text-primary text-lg mb-1 uppercase">Filmare & Editare Mobil</h3>
+                    <p class="text-on-surface-variant text-sm">CapCut și tehnici de filmare cu telefonul — calitate maximă fără aparatură</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT PREVIEW -->
+<section class="py-28 bg-surface-container-lowest">
+    <div class="max-w-7xl mx-auto px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+            <div class="aspect-video rounded-xl overflow-hidden border border-outline-variant/20">
+                <img alt="Andrei și Alex — Academia de Video" class="w-full h-full object-cover" src="images/andrei_alex.jpeg">
+            </div>
+            <div>
+                <span class="text-[#00e1ab] font-headline font-bold text-xs tracking-[0.3em] uppercase mb-4 block">Cine suntem</span>
+                <h2 class="text-4xl font-headline font-bold text-primary uppercase tracking-tight mb-6">
+                    10 ANI DE VIDEO.<br>
+                    <span class="text-primary-fixed-dim">AZI ADĂUGĂM AI.</span>
+                </h2>
+                <p class="text-on-surface-variant leading-relaxed mb-6 text-lg">
+                    Suntem Andrei și Alex — doi frați cu 10 ani de experiență în producție video, pe 3 continente, pentru clienți din Europa, Asia și SUA. Am filmat, am editat, am crescut canale de la zero.
+                </p>
+                <p class="text-on-surface-variant leading-relaxed mb-8">
+                    Acum am integrat AI în fiecare parte a workflow-ului nostru — de la scrierea scenariilor, la editare, la postarea automată pe social media. Și vrem să îți arătăm și ție cum.
+                </p>
+                <a href="/despre-noi.html" class="border border-outline-variant text-primary px-8 py-3 rounded-md font-bold text-sm tracking-wide hover:bg-surface-container-high transition-colors inline-block uppercase">
+                    Citește povestea noastră →
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- BLOG PREVIEW -->
+<section class="py-28 bg-surface">
+    <div class="max-w-7xl mx-auto px-8">
+        <div class="flex justify-between items-end mb-16">
+            <div>
+                <span class="text-[#00e1ab] font-headline font-bold text-xs tracking-[0.3em] uppercase mb-4 block">Ultimele articole</span>
+                <h2 class="text-4xl font-headline font-bold text-primary uppercase tracking-tight">BLOG</h2>
+            </div>
+            <a href="/blog.html" class="text-primary-fixed-dim font-headline font-bold text-sm tracking-[0.15em] uppercase hover:text-primary-fixed transition-colors">
+                Toate articolele →
+            </a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <a href="/blog.html" class="group block bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/10 hover:border-primary-fixed-dim/30 transition-all duration-300 text-decoration-none" style="text-decoration:none;">
+                <div class="h-48 bg-surface-container flex items-center justify-center">
+                    <span class="material-symbols-outlined text-4xl text-outline">article</span>
+                </div>
+                <div class="p-6">
+                    <span class="text-[#00e1ab] text-xs font-bold uppercase tracking-widest">AI Video</span>
+                    <h3 class="text-lg font-headline font-bold text-primary mt-2 mb-2 group-hover:text-primary-fixed-dim transition-colors">Top 5 Instrumente AI pentru Video în 2025</h3>
+                    <p class="text-on-surface-variant text-sm">Ghidul complet cu cele mai bune unelte pe care le folosim noi zilnic...</p>
+                </div>
+            </a>
+            <a href="/blog.html" class="group block bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/10 hover:border-primary-fixed-dim/30 transition-all duration-300" style="text-decoration:none;">
+                <div class="h-48 bg-surface-container flex items-center justify-center">
+                    <span class="material-symbols-outlined text-4xl text-outline">article</span>
+                </div>
+                <div class="p-6">
+                    <span class="text-[#00e1ab] text-xs font-bold uppercase tracking-widest">Tutoriale</span>
+                    <h3 class="text-lg font-headline font-bold text-primary mt-2 mb-2 group-hover:text-primary-fixed-dim transition-colors">Cum am Generat un Clip Cinematic cu Kling AI</h3>
+                    <p class="text-on-surface-variant text-sm">Pas cu pas — de la prompt la video final, gata de publicat...</p>
+                </div>
+            </a>
+            <a href="/blog.html" class="group block bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/10 hover:border-primary-fixed-dim/30 transition-all duration-300" style="text-decoration:none;">
+                <div class="h-48 bg-surface-container flex items-center justify-center">
+                    <span class="material-symbols-outlined text-4xl text-outline">article</span>
+                </div>
+                <div class="p-6">
+                    <span class="text-[#00e1ab] text-xs font-bold uppercase tracking-widest">Social Media</span>
+                    <h3 class="text-lg font-headline font-bold text-primary mt-2 mb-2 group-hover:text-primary-fixed-dim transition-colors">Cum am Automatizat Postările pe TikTok și YouTube</h3>
+                    <p class="text-on-surface-variant text-sm">Workflow-ul complet pe care îl folosim pentru 0 efort manual...</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-[#191c1e]">
+    <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-start px-12 py-16 w-full gap-12 border-t border-[#3a4a43]/20">
+            <div class="max-w-sm">
+                <div class="text-xl font-bold text-[#fbfffa] font-headline mb-4 uppercase tracking-tighter">Academia de Video</div>
+                <p class="text-[#fbfffa]/40 font-body text-sm leading-relaxed mb-6">Educație practică de video și AI în limba română. Creăm comunitatea care definește standardele producției video moderne în România.</p>
+                <div class="flex gap-4">
+                    <a class="w-10 h-10 rounded border border-outline-variant flex items-center justify-center text-primary hover:border-primary-fixed transition-colors" href="#">
+                        <span class="material-symbols-outlined text-lg">public</span>
+                    </a>
+                    <a class="w-10 h-10 rounded border border-outline-variant flex items-center justify-center text-primary hover:border-primary-fixed transition-colors" href="#">
+                        <span class="material-symbols-outlined text-lg">video_library</span>
+                    </a>
+                </div>
+            </div>
+            <div class="flex gap-16">
+                <div>
+                    <h4 class="text-sm font-headline font-bold text-primary uppercase tracking-widest mb-6">Pagini</h4>
+                    <div class="flex flex-col gap-3">
+                        <a href="/index.html" class="text-[#fbfffa]/40 hover:text-[#00e1ab] text-sm transition-colors" style="text-decoration:none;">Home</a>
+                        <a href="/despre-noi.html" class="text-[#fbfffa]/40 hover:text-[#00e1ab] text-sm transition-colors" style="text-decoration:none;">Despre noi</a>
+                        <a href="/cursuri.html" class="text-[#fbfffa]/40 hover:text-[#00e1ab] text-sm transition-colors" style="text-decoration:none;">Cursuri</a>
+                        <a href="/blog.html" class="text-[#fbfffa]/40 hover:text-[#00e1ab] text-sm transition-colors" style="text-decoration:none;">Blog</a>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full md:w-auto">
+                <h4 class="text-sm font-headline font-bold text-primary uppercase tracking-widest mb-6">Newsletter</h4>
+                <p class="text-[#fbfffa]/40 text-sm mb-4">Primește tips & tricks săptămânale de AI video direct în inbox.</p>
+                <div class="flex gap-2">
+                    <input class="bg-surface-container-highest border-none rounded-md px-4 py-2 text-primary focus:ring-1 focus:ring-primary-fixed text-sm w-full md:w-64" placeholder="Email-ul tău" type="email">
+                    <button class="bg-primary-fixed text-on-primary-fixed px-6 py-2 rounded-md font-bold text-sm">OK</button>
+                </div>
+            </div>
+        </div>
+        <div class="px-12 py-8 border-t border-[#3a4a43]/10 text-center md:text-left">
+            <span class="text-[#fbfffa]/40 text-xs uppercase tracking-widest">© 2026 Academia de Video. Toate drepturile rezervate.</span>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
