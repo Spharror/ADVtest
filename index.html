@@ -148,6 +148,39 @@ tailwind.config = {
     /* Mobile menu */
     #mobile-menu { display: none; }
     #mobile-menu.open { display: flex; }
+
+    /* ─── SCROLL REVEAL ANIMATIONS ─── */
+    .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: opacity, transform;
+    }
+    .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    /* Stagger child reveals using delay */
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* Subtle scale-in for cards */
+    .reveal-scale {
+        opacity: 0;
+        transform: scale(0.96) translateY(20px);
+        transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal-scale.is-visible {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+
+    /* Counter base styling */
+    .counter { display: inline-block; }
 </style>
 <!-- Meta Pixel Code -->
 <script>
@@ -250,7 +283,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 <section class="py-28 bg-surface">
     <div class="max-w-7xl mx-auto px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
-            <div>
+            <div class="reveal">
                 <span class="text-[#00e1ab] font-headline font-bold text-base tracking-[0.3em] uppercase mb-4 block">CE SE ÎNTÂMPLĂ ACUM — ȘI DE CE TE COSTĂ</span>
                 <h2 class="text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight mb-8 leading-tight">
                     În timp ce tu nu postezi,<br><span class="text-primary-fixed-dim">concurenții tăi îți iau clienții.</span>
@@ -263,20 +296,20 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             </div>
             <div class="grid grid-cols-2 gap-4">
                 <!-- Stat cards -->
-                <div class="bg-surface-container-low rounded-xl p-8 border border-outline-variant/20 hover:border-primary-fixed/30 transition-colors">
-                    <div class="text-5xl font-headline font-bold text-primary-fixed-dim mb-2">80%</div>
+                <div class="reveal-scale bg-surface-container-low rounded-xl p-8 border border-outline-variant/20 hover:border-primary-fixed/30 transition-colors">
+                    <div class="text-5xl font-headline font-bold text-primary-fixed-dim mb-2"><span class="counter" data-count="80" data-suffix="%">0%</span></div>
                     <div class="text-on-surface-variant text-sm leading-relaxed">din conținutul online va fi AI — cei care știu să îl creeze vor domina feedul. Ceilalți vor dispărea.</div>
                 </div>
-                <div class="bg-surface-container-low rounded-xl p-8 border border-outline-variant/20 hover:border-primary-fixed/30 transition-colors">
-                    <div class="text-5xl font-headline font-bold text-primary-fixed-dim mb-2">10x</div>
+                <div class="reveal-scale reveal-delay-1 bg-surface-container-low rounded-xl p-8 border border-outline-variant/20 hover:border-primary-fixed/30 transition-colors">
+                    <div class="text-5xl font-headline font-bold text-primary-fixed-dim mb-2"><span class="counter" data-count="10" data-suffix="x">0x</span></div>
                     <div class="text-on-surface-variant text-sm leading-relaxed">mai rapid — în timp ce alții filmează zile întregi, tu livrezi un clip gata de postat în 30 de minute.</div>
                 </div>
-                <div class="bg-surface-container-low rounded-xl p-8 border border-outline-variant/20 hover:border-primary-fixed/30 transition-colors">
-                    <div class="text-5xl font-headline font-bold text-primary-fixed-dim mb-2">0 €</div>
+                <div class="reveal-scale reveal-delay-2 bg-surface-container-low rounded-xl p-8 border border-outline-variant/20 hover:border-primary-fixed/30 transition-colors">
+                    <div class="text-5xl font-headline font-bold text-primary-fixed-dim mb-2"><span class="counter" data-count="0" data-start="1000" data-suffix=" €">1000 €</span></div>
                     <div class="text-on-surface-variant text-sm leading-relaxed">echipament necesar — nicio cameră, niciun studio, niciun editor angajat. Doar laptopul tău.</div>
                 </div>
-                <div class="bg-surface-container-low rounded-xl p-8 border border-outline-variant/20 hover:border-primary-fixed/30 transition-colors">
-                    <div class="text-5xl font-headline font-bold text-primary-fixed-dim mb-2">∞</div>
+                <div class="reveal-scale reveal-delay-3 bg-surface-container-low rounded-xl p-8 border border-outline-variant/20 hover:border-primary-fixed/30 transition-colors">
+                    <div class="text-5xl font-headline font-bold text-primary-fixed-dim mb-2"><span class="counter" data-mode="infinity" data-suffix="" data-count="100">0</span></div>
                     <div class="text-on-surface-variant text-sm leading-relaxed">Conținut infinit — reclame, postări, campanii, prezentări. Fără să te blochezi vreodată în "nu am ce posta."</div>
                 </div>
             </div>
@@ -287,7 +320,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 <!-- AI VIDEO SHOWCASE -->
 <section class="py-28 bg-surface-container-lowest grid-bg" id="ai-showcase">
     <div class="max-w-7xl mx-auto px-8">
-        <div class="text-center mb-20">
+        <div class="reveal text-center mb-20">
             <span class="text-[#00e1ab] font-headline font-bold text-base tracking-[0.3em] uppercase mb-4 block">Creat 100% cu AI</span>
             <h2 class="text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight mb-4">
                 Asta ar putea fi reclama ta.<br><span class="text-primary-fixed-dim">Generată în 30 de minute. De pe orice laptop.</span>
@@ -361,7 +394,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     <div class="max-w-7xl mx-auto px-8">
 
         <!-- Header -->
-        <div class="text-center mb-16">
+        <div class="reveal text-center mb-16">
             <span class="inline-block px-4 py-2 bg-secondary-container text-[#00e1ab] rounded-full text-sm font-bold tracking-[0.2em] uppercase mb-6 font-headline border border-[#00e1ab]/20">
                 PENTRU CINE ESTE ACADEMIA DE VIDEO
             </span>
@@ -374,7 +407,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
 
             <!-- Card 1: Antreprenorul -->
-            <div class="relative group rounded-2xl overflow-hidden border border-outline-variant/20 hover:border-primary-fixed/40 transition-all duration-500 bg-surface-container-low">
+            <div class="reveal-scale relative group rounded-2xl overflow-hidden border border-outline-variant/20 hover:border-primary-fixed/40 transition-all duration-500 bg-surface-container-low">
                 <!-- Top accent bar -->
                 <div class="h-1 w-full bg-gradient-to-r from-primary-fixed-dim to-transparent"></div>
                 <div class="p-10">
@@ -407,7 +440,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             </div>
 
             <!-- Card 2: Freelancerul -->
-            <div class="relative group rounded-2xl overflow-hidden border border-outline-variant/20 hover:border-primary-fixed/40 transition-all duration-500 bg-surface-container-low">
+            <div class="reveal-scale reveal-delay-1 relative group rounded-2xl overflow-hidden border border-outline-variant/20 hover:border-primary-fixed/40 transition-all duration-500 bg-surface-container-low">
                 <!-- Top accent bar -->
                 <div class="h-1 w-full bg-gradient-to-r from-primary-fixed-dim to-transparent"></div>
                 <div class="p-10">
@@ -468,7 +501,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full opacity-10 blur-[120px]" style="background: radial-gradient(ellipse, #00e1ab 0%, transparent 70%);"></div>
     <div class="relative max-w-2xl mx-auto px-8">
 
-        <div class="text-center mb-10">
+        <div class="reveal text-center mb-10">
             <span class="inline-block px-4 py-2 bg-secondary-container text-[#00e1ab] rounded-full text-sm font-bold tracking-[0.2em] uppercase mb-6 font-headline border border-[#00e1ab]/20">
                 OFERTĂ DE LANSARE
             </span>
@@ -478,7 +511,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         </div>
 
         <!-- Price card -->
-        <div class="rounded-2xl border border-primary-fixed/30 overflow-hidden relative" style="background: linear-gradient(135deg, rgba(0,225,171,0.12) 0%, rgba(0,225,171,0.02) 100%);">
+        <div class="reveal-scale rounded-2xl border border-primary-fixed/30 overflow-hidden relative" style="background: linear-gradient(135deg, rgba(0,225,171,0.12) 0%, rgba(0,225,171,0.02) 100%);">
             <!-- Discount banner -->
             <div class="bg-primary-fixed text-on-primary-fixed text-center py-3 font-headline font-bold text-sm uppercase tracking-widest">
                 ⚡ Reducere 70% — doar azi
@@ -494,7 +527,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                     <span class="text-6xl md:text-7xl font-headline font-bold text-primary-fixed-dim glow-text">41 lei</span>
                     <span class="text-xl text-on-surface-variant">/lună</span>
                 </div>
-                <p class="text-on-surface-variant text-sm mb-8">Mai puțin decât un prânz la oraș.</p>
+                <p class="text-on-surface-variant text-sm mb-8">Mai puțin decât un prânz în oraș.</p>
 
                 <!-- Timer -->
                 <div class="bg-surface-container-lowest/60 rounded-xl border border-outline-variant/20 p-6 mb-8">
@@ -554,7 +587,7 @@ setInterval(updateCountdown, 1000);
     <div class="max-w-4xl mx-auto px-8">
 
         <!-- Header -->
-        <div class="text-center mb-16">
+        <div class="reveal text-center mb-16">
             <span class="inline-block px-4 py-2 bg-secondary-container text-[#00e1ab] rounded-full text-sm font-bold tracking-[0.2em] uppercase mb-6 font-headline border border-[#00e1ab]/20">
                 CE PRIMEȘTI PENTRU 41 LEI/LUNĂ
             </span>
@@ -567,7 +600,7 @@ setInterval(updateCountdown, 1000);
         </div>
 
         <!-- ─── BLOCK 1: CURSURI (toate la un loc) ─── -->
-        <div class="mb-6 rounded-2xl border border-outline-variant/20 bg-surface-container-low overflow-hidden">
+        <div class="reveal-scale mb-6 rounded-2xl border border-outline-variant/20 bg-surface-container-low overflow-hidden">
             <!-- Block header -->
             <div class="relative px-8 py-6 border-b border-outline-variant/10" style="background: linear-gradient(135deg, rgba(0,225,171,0.08) 0%, rgba(0,225,171,0) 100%);">
                 <div class="flex items-center gap-4 mb-1">
@@ -628,7 +661,7 @@ setInterval(updateCountdown, 1000);
                         <span class="absolute top-4 right-4 text-[10px] font-bold uppercase tracking-widest text-primary-fixed-dim bg-primary-fixed/10 border border-primary-fixed/30 px-2.5 py-1 rounded">În curând</span>
                         <div class="flex items-start justify-between gap-4 mb-1 mt-3">
                             <h4 class="text-primary font-headline font-bold text-lg leading-tight">Filmare cu telefonul</h4>
-                            <span class="text-primary-fixed-dim font-headline font-bold text-lg whitespace-nowrap">130 lei</span>
+                            <span class="text-primary-fixed-dim font-headline font-bold text-lg whitespace-nowrap">500 lei</span>
                         </div>
                         <p class="text-on-surface-variant text-sm leading-relaxed mt-1">Cum filmezi profesional cu ce ai în buzunar</p>
                     </div>
@@ -638,7 +671,7 @@ setInterval(updateCountdown, 1000);
             <!-- Footer: subtotal -->
             <div class="px-8 py-5 bg-surface-container/60 border-t border-outline-variant/10 flex items-center justify-between">
                 <span class="text-on-surface-variant text-sm uppercase tracking-[0.2em] font-bold font-headline">Valoare totală cursuri</span>
-                <span class="text-primary-fixed-dim font-headline font-bold text-2xl">1.400 lei</span>
+                <span class="text-primary-fixed-dim font-headline font-bold text-2xl">1.770 lei</span>
             </div>
         </div>
 
@@ -647,7 +680,7 @@ setInterval(updateCountdown, 1000);
             <p class="text-[#00e1ab] text-base font-bold tracking-[0.25em] uppercase font-headline text-center mb-8">02 — Plus, în fiecare lună</p>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 
-                <div class="group relative rounded-xl border border-outline-variant/20 bg-surface-container-low p-8 hover:border-primary-fixed/30 transition-all">
+                <div class="reveal-scale group relative rounded-xl border border-outline-variant/20 bg-surface-container-low p-8 hover:border-primary-fixed/30 transition-all">
                     <div class="w-12 h-12 rounded-lg bg-primary-fixed/10 border border-primary-fixed/20 flex items-center justify-center mb-5">
                         <span class="material-symbols-outlined text-2xl text-primary-fixed-dim">forum</span>
                     </div>
@@ -659,7 +692,7 @@ setInterval(updateCountdown, 1000);
                     </div>
                 </div>
 
-                <div class="group relative rounded-xl border border-outline-variant/20 bg-surface-container-low p-8 hover:border-primary-fixed/30 transition-all">
+                <div class="reveal-scale reveal-delay-1 group relative rounded-xl border border-outline-variant/20 bg-surface-container-low p-8 hover:border-primary-fixed/30 transition-all">
                     <div class="w-12 h-12 rounded-lg bg-primary-fixed/10 border border-primary-fixed/20 flex items-center justify-center mb-5">
                         <span class="material-symbols-outlined text-2xl text-primary-fixed-dim">videocam</span>
                     </div>
@@ -671,7 +704,7 @@ setInterval(updateCountdown, 1000);
                     </div>
                 </div>
 
-                <div class="group relative rounded-xl border border-outline-variant/20 bg-surface-container-low p-8 hover:border-primary-fixed/30 transition-all">
+                <div class="reveal-scale reveal-delay-2 group relative rounded-xl border border-outline-variant/20 bg-surface-container-low p-8 hover:border-primary-fixed/30 transition-all">
                     <div class="w-12 h-12 rounded-lg bg-primary-fixed/10 border border-primary-fixed/20 flex items-center justify-center mb-5">
                         <span class="material-symbols-outlined text-2xl text-primary-fixed-dim">auto_awesome</span>
                     </div>
@@ -687,20 +720,49 @@ setInterval(updateCountdown, 1000);
         </div>
 
         <!-- ─── TOTAL ROW (highlighted) ─── -->
-        <div class="rounded-2xl p-8 mb-12 relative overflow-hidden" style="background: linear-gradient(135deg, rgba(0,225,171,0.15) 0%, rgba(0,225,171,0.04) 100%); border: 1px solid rgba(0,225,171,0.3);">
+        <div class="reveal-scale rounded-2xl p-8 md:p-10 mb-6 relative overflow-hidden" style="background: linear-gradient(135deg, rgba(0,225,171,0.15) 0%, rgba(0,225,171,0.04) 100%); border: 1px solid rgba(0,225,171,0.3);">
             <div class="absolute top-0 right-0 w-64 h-64 rounded-full blur-[100px] opacity-20" style="background: #00e1ab;"></div>
             <div class="relative grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
                 <div>
                     <p class="text-on-surface-variant text-sm uppercase tracking-[0.2em] font-bold font-headline mb-2">Total valoare</p>
                     <p class="text-4xl md:text-5xl font-headline font-bold">
-                        <span class="text-on-surface-variant line-through opacity-50">1.615 lei</span>
+                        <span class="text-on-surface-variant line-through opacity-50">1.985 lei</span>
                     </p>
                 </div>
                 <div class="md:text-right">
                     <p class="text-on-surface-variant text-sm uppercase tracking-[0.2em] font-bold font-headline mb-2">Tu plătești doar</p>
-                    <p class="text-4xl md:text-5xl font-headline font-bold text-primary-fixed-dim glow-text">
-                        41 lei<span class="text-2xl text-on-surface-variant">/lună</span>
-                    </p>
+                    <div class="flex items-baseline gap-3 md:justify-end mb-1">
+                        <span class="text-2xl text-on-surface-variant line-through opacity-40 font-headline">137 lei</span>
+                        <p class="text-4xl md:text-5xl font-headline font-bold text-primary-fixed-dim glow-text">
+                            41 lei<span class="text-2xl text-on-surface-variant">/lună</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ─── DISCOUNT + PRICE INCREASE WARNING ─── -->
+        <div class="reveal rounded-2xl border border-primary-fixed/30 overflow-hidden mb-12 bg-surface-container-low">
+            <div class="grid grid-cols-1 md:grid-cols-2">
+                <!-- Discount side -->
+                <div class="p-8 flex items-center gap-5 border-b md:border-b-0 md:border-r border-outline-variant/15">
+                    <div class="w-16 h-16 shrink-0 rounded-full flex items-center justify-center font-headline font-bold text-xl" style="background: rgba(0,225,171,0.15); border: 2px solid rgba(0,225,171,0.4); color: #00e1ab;">
+                        -70%
+                    </div>
+                    <div>
+                        <p class="text-primary font-headline font-bold text-lg leading-tight mb-1">Ai un discount de 70% activ</p>
+                        <p class="text-on-surface-variant text-sm leading-relaxed">Disponibil doar dacă intri azi, prin acest link.</p>
+                    </div>
+                </div>
+                <!-- Price increase warning side -->
+                <div class="p-8 flex items-center gap-5">
+                    <div class="w-16 h-16 shrink-0 rounded-full bg-error-container/30 border-2 border-error/40 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-3xl text-error">trending_up</span>
+                    </div>
+                    <div>
+                        <p class="text-primary font-headline font-bold text-lg leading-tight mb-1">Prețul crește în curând la 137 lei</p>
+                        <p class="text-on-surface-variant text-sm leading-relaxed">Cei care intră acum păstrează prețul de 41 lei/lună — pentru totdeauna.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -731,7 +793,7 @@ setInterval(updateCountdown, 1000);
     <div class="max-w-5xl mx-auto px-8">
 
         <!-- Headline -->
-        <div class="text-center mb-16">
+        <div class="reveal text-center mb-16">
             <h2 class="text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight leading-tight">
                 Învață de la oameni care<br><span class="text-primary-fixed-dim">fac asta în fiecare zi</span>
             </h2>
@@ -751,7 +813,7 @@ setInterval(updateCountdown, 1000);
         </div>
 
         <!-- Quote card -->
-        <div class="relative rounded-2xl border border-primary-fixed/20 bg-surface-container-low p-10 mb-16 overflow-hidden">
+        <div class="reveal-scale relative rounded-2xl border border-primary-fixed/20 bg-surface-container-low p-10 mb-16 overflow-hidden">
             <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary-fixed-dim to-transparent rounded-l-2xl"></div>
             <div class="absolute top-6 right-8 text-primary-fixed/10 font-headline font-bold text-[120px] leading-none select-none">"</div>
             <div class="relative space-y-5 text-on-surface-variant leading-relaxed text-base">
@@ -763,24 +825,24 @@ setInterval(updateCountdown, 1000);
 
         <!-- 4 credential cards -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
-            <div class="bg-surface-container-low rounded-xl p-6 border border-outline-variant/10 text-center hover:border-primary-fixed/20 transition-colors">
+            <div class="reveal-scale bg-surface-container-low rounded-xl p-6 border border-outline-variant/10 text-center hover:border-primary-fixed/20 transition-colors">
                 <div class="text-2xl mb-2">📅</div>
-                <div class="text-2xl font-headline font-bold text-primary-fixed-dim mb-1">10+</div>
+                <div class="text-2xl font-headline font-bold text-primary-fixed-dim mb-1"><span class="counter" data-count="10" data-suffix="+">0+</span></div>
                 <div class="text-on-surface-variant text-xs leading-relaxed">ani în producție video profesională</div>
             </div>
-            <div class="bg-surface-container-low rounded-xl p-6 border border-outline-variant/10 text-center hover:border-primary-fixed/20 transition-colors">
+            <div class="reveal-scale reveal-delay-1 bg-surface-container-low rounded-xl p-6 border border-outline-variant/10 text-center hover:border-primary-fixed/20 transition-colors">
                 <div class="text-2xl mb-2">🎬</div>
-                <div class="text-2xl font-headline font-bold text-primary-fixed-dim mb-1">200+</div>
+                <div class="text-2xl font-headline font-bold text-primary-fixed-dim mb-1"><span class="counter" data-count="200" data-suffix="+">0+</span></div>
                 <div class="text-on-surface-variant text-xs leading-relaxed">clienți pe multiple continente</div>
             </div>
-            <div class="bg-surface-container-low rounded-xl p-6 border border-outline-variant/10 text-center hover:border-primary-fixed/20 transition-colors">
+            <div class="reveal-scale reveal-delay-2 bg-surface-container-low rounded-xl p-6 border border-outline-variant/10 text-center hover:border-primary-fixed/20 transition-colors">
                 <div class="text-2xl mb-2">⏱️</div>
-                <div class="text-2xl font-headline font-bold text-primary-fixed-dim mb-1">20.000+</div>
+                <div class="text-2xl font-headline font-bold text-primary-fixed-dim mb-1"><span class="counter" data-count="20000" data-suffix="+" data-format="thousand">0+</span></div>
                 <div class="text-on-surface-variant text-xs leading-relaxed">ore de filmat și editat</div>
             </div>
-            <div class="bg-surface-container-low rounded-xl p-6 border border-outline-variant/10 text-center hover:border-primary-fixed/20 transition-colors">
+            <div class="reveal-scale reveal-delay-3 bg-surface-container-low rounded-xl p-6 border border-outline-variant/10 text-center hover:border-primary-fixed/20 transition-colors">
                 <div class="text-2xl mb-2">👁️</div>
-                <div class="text-2xl font-headline font-bold text-primary-fixed-dim mb-1">5M+</div>
+                <div class="text-2xl font-headline font-bold text-primary-fixed-dim mb-1"><span class="counter" data-mode="views" data-count="5000000" data-suffix="+">100k</span></div>
                 <div class="text-on-surface-variant text-xs leading-relaxed">vizualizări generate pe social media</div>
             </div>
         </div>
@@ -801,7 +863,7 @@ setInterval(updateCountdown, 1000);
     <div class="max-w-3xl mx-auto px-8">
 
         <!-- Header -->
-        <div class="text-center mb-16">
+        <div class="reveal text-center mb-16">
             <span class="inline-block px-4 py-2 bg-secondary-container text-[#00e1ab] rounded-full text-sm font-bold tracking-[0.2em] uppercase mb-6 font-headline border border-[#00e1ab]/20">
                 ÎNTREBĂRI FRECVENTE
             </span>
@@ -910,7 +972,7 @@ function toggleFaq(btn) {
 <!-- FINAL CTA -->
 <section class="py-32 bg-surface relative overflow-hidden">
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full opacity-15 blur-[120px]" style="background: radial-gradient(ellipse, #00e1ab 0%, transparent 70%);"></div>
-    <div class="relative max-w-4xl mx-auto px-8 text-center">
+    <div class="reveal relative max-w-4xl mx-auto px-8 text-center">
         <h2 class="text-5xl md:text-7xl font-headline font-bold text-primary tracking-tight leading-[1.05] mb-12 glow-text">
             M-am hotărât,<br><span class="text-primary-fixed-dim italic">vreau să învăț!</span>
         </h2>
@@ -964,5 +1026,144 @@ function toggleFaq(btn) {
     </div>
 </footer>
 
+
+<!-- ─── SCROLL REVEAL + COUNTER ANIMATIONS ─── -->
+<script>
+(function() {
+    // Respect reduced-motion preference
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.querySelectorAll('.reveal, .reveal-scale').forEach(el => el.classList.add('is-visible'));
+        document.querySelectorAll('.counter').forEach(el => {
+            const mode = el.dataset.mode;
+            const suffix = el.dataset.suffix || '';
+            if (mode === 'infinity' || el.dataset.infinity) { el.textContent = '∞'; return; }
+            if (mode === 'views') {
+                const end = parseInt(el.dataset.count, 10);
+                const m = end / 1000000;
+                el.textContent = (m % 1 === 0 ? m.toFixed(0) : m.toFixed(1)) + 'M' + suffix;
+                return;
+            }
+            const end = parseInt(el.dataset.count, 10);
+            const format = el.dataset.format;
+            el.textContent = (format === 'thousand' ? end.toLocaleString('ro-RO') : end) + suffix;
+        });
+        return;
+    }
+
+    // Format a number into human-readable form (k / M)
+    function formatViews(n) {
+        if (n >= 1000000) {
+            const m = n / 1000000;
+            // 1 decimal under 10M, integer otherwise
+            return (m % 1 === 0 ? m.toFixed(0) : m.toFixed(1)) + 'M';
+        }
+        if (n >= 1000) {
+            return Math.round(n / 1000) + 'k';
+        }
+        return String(n);
+    }
+
+    function animateCounter(el) {
+        if (el.dataset.animated) return;
+        el.dataset.animated = '1';
+        const mode = el.dataset.mode;
+        const suffix = el.dataset.suffix || '';
+
+        // ── Mode: infinity — accelerating ramp 0→999, swap to ∞
+        if (mode === 'infinity') {
+            const totalDuration = 1800;
+            const startTime = performance.now();
+            function tick(now) {
+                const t = Math.min((now - startTime) / totalDuration, 1);
+                // exponential acceleration — slow at first, very fast near end
+                const eased = Math.pow(t, 3);
+                const current = Math.floor(eased * 999);
+                el.textContent = current + suffix;
+                if (t < 1) requestAnimationFrame(tick);
+                else el.textContent = '∞';
+            }
+            requestAnimationFrame(tick);
+            return;
+        }
+
+        // ── Mode: views — 100k → 1M (slow steady) → 5M (fast accel)
+        if (mode === 'views') {
+            const end = parseInt(el.dataset.count, 10);  // 5,000,000
+            const phase1Duration = 1200; // 100k → 1M, steady
+            const phase2Duration = 700;  // 1M → 5M, fast/accelerating
+            const start = 100000;
+            const mid = 1000000;
+            const startTime = performance.now();
+
+            function tick(now) {
+                const elapsed = now - startTime;
+                let current;
+                if (elapsed < phase1Duration) {
+                    const t = elapsed / phase1Duration;
+                    // linear within phase 1 (so it looks like steady +100k increments)
+                    current = start + (mid - start) * t;
+                } else if (elapsed < phase1Duration + phase2Duration) {
+                    const t = (elapsed - phase1Duration) / phase2Duration;
+                    // accelerating (ease-in cubic)
+                    const eased = t * t * t;
+                    current = mid + (end - mid) * eased;
+                } else {
+                    el.textContent = formatViews(end) + suffix;
+                    return;
+                }
+                el.textContent = formatViews(Math.floor(current)) + suffix;
+                requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+            return;
+        }
+
+        // ── Default mode (and legacy data-infinity / data-start)
+        const end = parseInt(el.dataset.count, 10);
+        const startVal = el.dataset.start ? parseInt(el.dataset.start, 10) : 0;
+        const format = el.dataset.format;
+        const isInfinity = !!el.dataset.infinity;
+        const duration = 1600;
+        const startTime = performance.now();
+
+        function tick(now) {
+            const t = Math.min((now - startTime) / duration, 1);
+            const eased = 1 - Math.pow(1 - t, 3);
+            const current = Math.round(startVal + (end - startVal) * eased);
+            if (t < 1) {
+                const display = format === 'thousand' ? current.toLocaleString('ro-RO') : current;
+                el.textContent = display + suffix;
+                requestAnimationFrame(tick);
+            } else {
+                if (isInfinity) el.textContent = '∞';
+                else {
+                    const display = format === 'thousand' ? end.toLocaleString('ro-RO') : end;
+                    el.textContent = display + suffix;
+                }
+            }
+        }
+        requestAnimationFrame(tick);
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                // Animate any counters within this element
+                entry.target.querySelectorAll('.counter').forEach(animateCounter);
+                if (entry.target.classList.contains('counter')) animateCounter(entry.target);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -60px 0px'
+    });
+
+    document.querySelectorAll('.reveal, .reveal-scale').forEach(el => observer.observe(el));
+    // Observe stand-alone counters (in case any aren't inside a .reveal)
+    document.querySelectorAll('.counter').forEach(el => observer.observe(el));
+})();
+</script>
 </body>
 </html>
